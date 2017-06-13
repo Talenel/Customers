@@ -96,6 +96,12 @@ public class Customer {
 		return db2.getCustomers(last);
 		
 	}
+	public static void displayTotals()
+	{
+		Database db3=new Database();
+		db3.getTotals();
+		
+	}
 	
 	
 	

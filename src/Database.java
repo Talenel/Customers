@@ -482,6 +482,64 @@ public class Database {
 		
 	}
 	
+	public void getTotals()
+	{
+		Connection con = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		String sql = "Select  count(distinct CustID) as 'Number of Customers', count(distinct State) as 'Number of States' , count(distinct compID) as 'Number of Companies'"
+				+"from (address join customer using(addID)) join isEmployee using(CustID)";
+		try{
+			Class.forName("com.mysql.jdbc.Driver");
+            con = DriverManager.getConnection("jdbc:mysql://localhost/Customers?autoReconnect=true&useSSL=false&"
+                                + "user=root&password=password");
+            
+            
+            
+            
+            
+			stmt = con.prepareStatement(sql);
+			
+			rs=stmt.executeQuery();
+			
+			
+			ResultSetMetaData col=rs.getMetaData();
+			for(int i=1;i<=col.getColumnCount();i++)
+			{
+				
+				System.out.print(col.getColumnName(i) + "\t");
+			}
+			System.out.println();
+			System.out.println();
+			while(rs.next()){
+				
+				
+				
+				for(int i=1;i<=col.getColumnCount();i++)
+				{
+					
+					System.out.print(rs.getString(i) + "\t\t\t\t");
+				}
+				System.out.println();
+			}
+			}catch (SQLException e) {
+				e.printStackTrace();
+			}catch (ClassNotFoundException e) {
+				e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				stmt.close();
+				con.close();
+			}catch(SQLException e){
+				e.printStackTrace();
+			}
+		}
+		
+	
+	}
+	
+	
 	
 
 }

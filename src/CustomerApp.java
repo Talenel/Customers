@@ -6,16 +6,29 @@ public class CustomerApp {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		boolean check=true;
+		
 		Scanner user = new Scanner(System.in);
+		
 		while(check)
-		{	
-			
-			System.out.println("Please input the desired last name to search for");
+		{	ArrayList<String> ids=null;
+			boolean check2=true;
+			boolean check5=true;
+			System.out.println("Please input the desired last name to search for.\n "
+					+ "Type in 'totals' to find information about database quantities");
 			String last=user.nextLine();
-			ArrayList<String> ids=Customer.displayCustomers(last);
+			if(last.equals("totals"))
+			{
+				Customer.displayTotals();
+				check5=false;
+				check2=false;
+			}
+			else
+			{
+				ids=Customer.displayCustomers(last);
+			}
 						
 			Customer cust=null;
-			boolean check2=true;
+			
 			while(check2==true)
 			{
 				System.out.println("Please input the desired customer id from the list."
@@ -54,9 +67,10 @@ public class CustomerApp {
 					
 				}
 			}
-		
-			cust.displayCustomer();
-			
+			if(check5)
+			{
+				cust.displayCustomer();
+			}
 			boolean check3=true;
 			while(check3==true)
 			{
