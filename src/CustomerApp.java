@@ -18,28 +18,40 @@ public class CustomerApp {
 			boolean check2=true;
 			while(check2==true)
 			{
-				System.out.println("Please input the desired customer id from the list");
-				try
+				System.out.println("Please input the desired customer id from the list."
+						+ "If the desired customer is not listed. Please enter (New)");
+				String id1=user.nextLine();
+				System.out.println("");
+				if(!id1.equals("New"))
 				{
+					try
+						{
+							
 						
-					String id1=user.nextLine();
-					System.out.println("");
-					int id=Integer.parseInt(id1);
-					
-					check2=checkIDs(id,ids);
-					if(!check2)
-					{
-						cust = new Customer(id);
-					}	
-					else
-					{
-						System.out.println("That is not one of the displayed customer ids. Please try again.");
+						int id=Integer.parseInt(id1);
+						
+						check2=checkIDs(id,ids);
+						if(!check2)
+						{
+							cust = new Customer(id);
+						}	
+						else
+						{
+							System.out.println("That is not one of the displayed customer ids. Please try again.");
+						}
+											
 					}
-										
+					catch(NumberFormatException e)
+					{
+						System.out.println("That is an invalid input. Please try again.");
+					}
 				}
-				catch(NumberFormatException e)
+				else
 				{
-					System.out.println("That is an invalid input. Please try again.");
+					
+					cust=createCust(user);
+					check2=false;
+					
 				}
 			}
 		
@@ -156,5 +168,54 @@ public class CustomerApp {
 		}
 		
 	}
+	
+	
+	
+	
+	public static Customer createCust(Scanner user)
+	{
+		System.out.println("Please input desired title.  For example 'Mr.'");
+		String title=user.nextLine();
+		
+		System.out.println("Please input desired first name");
+		String first=user.nextLine();
+		
+		System.out.println("Please input desired last name");
+		String last=user.nextLine();
+		
+		System.out.println("Please input desired email");
+		String email=user.nextLine();
+		
+		System.out.println("Please input desired street Address");
+		String add=user.nextLine();
+		
+		System.out.println("Please input desired city");
+		String city=user.nextLine();
+		
+		System.out.println("Please input desired state");
+		String state=user.nextLine();
+		
+		System.out.println("Please input desired zip code");
+		String zip=user.nextLine();
+		
+		System.out.println("Please input your job name, such as 'Software Engineer'");
+		String position=user.nextLine();
+		
+		System.out.println("Please input the company in which you are employed");
+		String company=user.nextLine();
+		
+		Customer cust = new Customer(title,first,last,add,city,state,zip,email,position,company);
+		return cust;
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

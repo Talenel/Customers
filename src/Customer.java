@@ -37,7 +37,32 @@ public class Customer {
 		
 		
 	}
-	
+	public Customer(String aTitle, String aFirstName, String aLastName, String anAddress, String aCity, String aState, String aZIP, String anEmail, String aPosition, String aCompany) {
+		// TODO Auto-generated constructor stub
+		db=new Database();
+		
+		
+		title=aTitle;
+		first=aFirstName;
+		last=aLastName;
+		street=anAddress;
+		city=aCity;
+		state=aState;
+		zip=aZIP;
+		email=anEmail;
+		position=aPosition;
+		company=aCompany;
+		db.addCustomer(title, first, last,email);
+		db.addAddress(street, city, state, zip);
+		custID=Integer.parseInt(db.getCustomerID());
+		int addID=Integer.parseInt(db.getAddressID());
+		db.updateCustomer(addID, custID);
+		db.addCompany(company);
+		int compID=Integer.parseInt(db.getCompanyID());
+		db.addEmployee(custID, position, compID);
+		
+		
+	}
 	
 	
 	
